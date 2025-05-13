@@ -24,7 +24,7 @@ app.post("/get-nearby-user", (req, res) => {
   }
   catch(e){
     console.log(e);
-    
+    return res.sendStatus(400)
   }
   if (!event_loc || !event_loc.latitude || !event_loc.longitude) {
     return res.status(400).send("Invalid event location");
@@ -72,7 +72,7 @@ app.post("/get-nearby-user", (req, res) => {
         // return Promise.all(notifications)
         //         .then(() => {
         //             console.log('All notifications sent successfully');
-        //             res.send('Notifications sent to nearby users');
+        //             res.sendStatus(200);
         //         })
         //         .catch(error => {
         //             console.error('Error sending notifications:', error);
@@ -84,6 +84,7 @@ app.post("/get-nearby-user", (req, res) => {
     })
     .catch((error) => {
       console.error("Error fetching documents:", error);
+      return res.sendStatus(500)
     });
 
   return res.sendStatus(200);
